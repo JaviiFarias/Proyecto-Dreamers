@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamers - Pitch Deck Interactivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals & Soft Pastels -->
+    <!-- Application Structure Plan: La estructura se ha modificado para seguir un flujo narrativo de pitch: Visión (el problema y la solución), Valor (la ciencia detrás del negocio), Mercado (nuestro entendimiento del cliente) y Producto (la ejecución tangible). Este flujo está diseñado para guiar a un inversor o jurado a través de un argumento de negocio lógico y persuasivo, culminando en un llamado a la acción. La interactividad se mantiene como una demostración de la profundidad y el enfoque data-driven de la marca. -->
+    <!-- Visualization & Content Choices: 1. Áreas de Desarrollo (Valor): Las tarjetas interactivas se conservan para demostrar el fundamento científico de la marca de manera didáctica y profesional. 2. Foco por Edad (Mercado): El gráfico de radar sigue siendo la pieza central, pero se recontextualiza como una herramienta de inteligencia de mercado, mostrando una segmentación precisa y validando el enfoque de producto. 3. Diagrama del Muñeco (Producto): El diagrama visual ahora sirve como un "product showcase", traduciendo los conceptos abstractos en características de diseño concretas y defendibles. Todos los elementos visuales se mantienen en Canvas y HTML/CSS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #4A4A4A;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #D97706;
+            border-bottom-color: #D97706;
+        }
+        .btn-age {
+            transition: all 0.3s;
+        }
+        .btn-age.active {
+            background-color: #F59E0B;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-amber-700">dreamers</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#vision" class="nav-link">Nuestra Visión</a>
+                <a href="#valor" class="nav-link">Nuestro Valor</a>
+                <a href="#mercado" class="nav-link">Mercado</a>
+                <a href="#producto" class="nav-link">Producto</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section id="vision" class="text-center mb-20 pt-10">
+            <h2 class="text-4xl font-bold text-amber-800 mb-4">Redefiniendo el valor del juego.</h2>
+            <p class="max-w-3xl mx-auto text-lg text-gray-700 leading-relaxed">
+                Buenas tardes. Mi nombre es Javier Farías y, junto a mi madre, fundamos <strong>Dreamers</strong>.
+                En un mercado saturado de juguetes que solo entretienen de forma pasiva, detectamos una necesidad fundamental desatendida: la de padres que buscan herramientas para potenciar el desarrollo de sus hijos desde la primera infancia.
+                Nuestra respuesta es contundente: Dreamers no vende muñecos, vende experiencias de crecimiento diseñadas con un propósito claro.
+            </p>
+        </section>
+
+        <section id="valor" class="mb-20 pt-10">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-amber-800 mb-3">Nuestro Valor Diferencial: Diseño Basado en Evidencia</h3>
+                <p class="max-w-3xl mx-auto text-gray-600">
+                    No diseñamos por intuición. Nuestro valor diferencial reside en un profundo entendimiento del desarrollo infantil. Cada producto es el resultado de una investigación sobre el impacto que el juego puede tener en cinco áreas cerebrales y de habilidades fundamentales. Los invitamos a explorar estos pilares.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
+                <div class="card bg-white p-6 rounded-xl shadow-md cursor-pointer text-center" data-area="sensorial">
+                    <div class="text-4xl mb-4">🖐️</div>
+                    <h4 class="text-lg font-bold mb-2 text-amber-700">Sensorial</h4>
+                    <p class="text-sm text-gray-500">Tacto, vista y oído.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-xl shadow-md cursor-pointer text-center" data-area="motor">
+                    <div class="text-4xl mb-4">🤏</div>
+                    <h4 class="text-lg font-bold mb-2 text-amber-700">Motor Fino</h4>
+                    <p class="text-sm text-gray-500">Coordinación y destreza.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-xl shadow-md cursor-pointer text-center" data-area="cognitivo">
+                    <div class="text-4xl mb-4">💡</div>
+                    <h4 class="text-lg font-bold mb-2 text-amber-700">Cognitivo</h4>
+                    <p class="text-sm text-gray-500">Pensamiento y resolución.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-xl shadow-md cursor-pointer text-center" data-area="emocional">
+                    <div class="text-4xl mb-4">❤️</div>
+                    <h4 class="text-lg font-bold mb-2 text-amber-700">Socio-Emocional</h4>
+                    <p class="text-sm text-gray-500">Apego y empatía.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-xl shadow-md cursor-pointer text-center" data-area="lenguaje">
+                    <div class="text-4xl mb-4">💬</div>
+                    <h4 class="text-lg font-bold mb-2 text-amber-700">Lenguaje</h4>
+                    <p class="text-sm text-gray-500">Comunicación y vocabulario.</p>
+                </div>
+            </div>
+            <div id="info-desarrollo" class="mt-8 p-8 bg-white rounded-xl shadow-inner min-h-[150px] flex items-center justify-center">
+                <p class="text-gray-500">Seleccionen un pilar para ver su aplicación.</p>
+            </div>
+        </section>
+
+        <section id="mercado" class="mb-20 pt-10">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-amber-800 mb-3">Inteligencia de Mercado: Segmentación por Etapas</h3>
+                <p class="max-w-3xl mx-auto text-gray-600">
+                    Entendemos que el mercado infantil no es monolítico; está segmentado por etapas con necesidades muy específicas. Esta herramienta interactiva demuestra nuestra capacidad para identificar y atender las prioridades de desarrollo en cada fase, permitiéndonos crear productos de alto valor y precisión para cada cliente.
+                </p>
+            </div>
+            <div class="flex justify-center flex-wrap gap-4 mb-8">
+                <button class="btn-age active px-6 py-2 bg-white rounded-full font-semibold shadow-sm" data-age="0-6m">0-6 meses</button>
+                <button class="btn-age px-6 py-2 bg-white rounded-full font-semibold shadow-sm" data-age="6-12m">6-12 meses</button>
+                <button class="btn-age px-6 py-2 bg-white rounded-full font-semibold shadow-sm" data-age="1-2a">1-2 años</button>
+                <button class="btn-age px-6 py-2 bg-white rounded-full font-semibold shadow-sm" data-age="2-3a">2-3 años+</button>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+                <div id="info-edad" class="bg-white p-8 rounded-xl shadow-lg">
+                </div>
+            </div>
+        </section>
+
+        <section id="producto" class="mb-20 pt-10">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-amber-800 mb-3">Nuestro Producto: Diseño Intencional</h3>
+                <p class="max-w-3xl mx-auto text-gray-600">
+                    Permítanme mostrarles cómo materializamos nuestra visión. Esto no es un simple muñeco. Es una herramienta de desarrollo cuidadosamente diseñada, donde cada textura, cada color y cada elemento interactivo tiene una función específica y justificada.
+                </p>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-lg flex flex-col md:flex-row items-center justify-center gap-8">
+                <div class="relative w-64 h-96">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-24 bg-amber-200 rounded-full"></div>
+                    <div class="absolute top-20 left-1/2 -translate-x-1/2 w-36 h-48 bg-teal-200 rounded-t-lg"></div>
+                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-28 bg-amber-200 left-[calc(50%-3rem)]"></div>
+                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-28 bg-amber-200 left-[calc(50%+1.5rem)]"></div>
+                    <div class="absolute top-24 left-0 w-8 h-20 bg-amber-200"></div>
+                    <div class="absolute top-24 right-0 w-8 h-20 bg-amber-200"></div>
+                    <div class="absolute top-6 left-[30%] w-5 h-5 bg-gray-800 rounded-full"></div>
+                    <div class="absolute top-6 right-[30%] w-5 h-5 bg-gray-800 rounded-full"></div>
+                    <div class="absolute top-12 left-1/2 -translate-x-1/2 w-8 h-4 border-2 border-red-400 rounded-b-full"></div>
+                    <div class="absolute top-24 left-1/2 -translate-x-1/2 w-2 h-10 bg-gray-600"></div>
+                </div>
+                <div class="max-w-md">
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-amber-600 font-bold mr-3">1.</span>
+                            <div>
+                                <h5 class="font-bold">Foco Visual Estratégico</h5>
+                                <p class="text-sm text-gray-600">Colores de alto contraste en el rostro para captar y estimular la visión de los neonatos.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-amber-600 font-bold mr-3">2.</span>
+                            <div>
+                                <h5 class="font-bold">Riqueza Táctil</h5>
+                                <p class="text-sm text-gray-600">Selección de telas (corderoy, seda, polar) que ofrecen un abanico de estímulos sensoriales.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-amber-600 font-bold mr-3">3.</span>
+                            <div>
+                                <h5 class="font-bold">Módulos de Destreza</h5>
+                                <p class="text-sm text-gray-600">Cierres, botones y lazos de tamaño seguro para ejercitar la motricidad fina a partir de los 18 meses.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-amber-600 font-bold mr-3">4.</span>
+                            <div>
+                                <h5 class="font-bold">Estímulo Auditivo Controlado</h5>
+                                <p class="text-sm text-gray-600">Integración de sonidos suaves (cascabel, papel celofán) para la exploración de causa y efecto.</p>
+                            </div>
+                        </li>
+                         <li class="flex items-start">
+                            <span class="text-amber-600 font-bold mr-3">5.</span>
+                            <div>
+                                <h5 class="font-bold">Diseño Ergonómico para el Apego</h5>
+                                <p class="text-sm text-gray-600">Peso y tamaño optimizados para facilitar la manipulación y fomentar el apego seguro.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="futuro" class="text-center mt-20 mb-10 pt-10">
+             <h2 class="text-4xl font-bold text-amber-800 mb-4">El Futuro es el Crecimiento.</h2>
+             <p class="max-w-3xl mx-auto text-lg text-gray-700 leading-relaxed">
+                Dreamers es más que un emprendimiento; es un proyecto con un propósito medible y un potencial de mercado enorme.
+                Estamos listos para escalar nuestra producción y expandir nuestras líneas de producto.
+                Los invitamos a formar parte de esta visión y a invertir en el desarrollo de las futuras generaciones. Muchas gracias.
+            </p>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-6 mt-12">
+        <p>&copy; 2025 Dreamers. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const data = {
+                desarrollo: {
+                    sensorial: {
+                        title: 'Pilar 1: Estimulación Sensorial',
+                        content: 'Es el cimiento sobre el cual se construye el aprendizaje. Un muñeco con una estudiada diversidad de texturas, colores y sonidos enriquece la experiencia del infante y acelera la creación de conexiones neuronales clave.',
+                        ideas: ['Uso de telas con diferentes propiedades táctiles.', 'Integración de sonidos de baja intensidad.', 'Elementos de alto contraste visual.']
+                    },
+                    motor: {
+                        title: 'Pilar 2: Desarrollo de la Motricidad Fina',
+                        content: 'La coordinación de músculos pequeños es una habilidad crítica. Integramos elementos como cierres, botones de gran tamaño o velcro, que funcionan como un gimnasio para la destreza manual y la coordinación ojo-mano.',
+                        ideas: ['Ropa con sistemas de cierre progresivos.', 'Calzado con lazos para practicar nudos.', 'Accesorios manipulables.']
+                    },
+                    cognitivo: {
+                        title: 'Pilar 3: Impulso Cognitivo',
+                        content: 'Nuestros muñecos son catalizadores del pensamiento simbólico y la resolución de problemas. Facilitan el entendimiento de conceptos como la permanencia del objeto y se convierten en el primer actor para el juego de roles.',
+                        ideas: ['Bolsillos para juegos de escondite.', 'Accesorios que promueven la clasificación.', 'Expresión facial neutra para la proyección de narrativas.']
+                    },
+                    emocional: {
+                        title: 'Pilar 4: Inteligencia Socio-Emocional',
+                        content: 'Actúan como objetos de apego seguro, proporcionando confort y reduciendo la ansiedad. A través del juego simbólico, los niños ensayan la empatía, el cuidado y aprenden a gestionar y expresar sus propias emociones.',
+                        ideas: ['Dimensiones y peso estudiados para el abrazo.', 'Materiales que retienen el calor corporal.', 'Diseño que invita al cuidado.']
+                    },
+                    lenguaje: {
+                        title: 'Pilar 5: Expansión del Lenguaje',
+                        content: 'El muñeco es el interlocutor ideal. Facilita la interacción verbal, permitiendo a padres y niños nombrar partes del cuerpo, colores o inventar historias, expandiendo así el vocabulario y las habilidades comunicativas.',
+                        ideas: ['Partes del cuerpo claramente definidas.', 'Vestimenta con colores y formas primarias.', 'Diseño que estimula la creación de historias.']
+                    }
+                },
+                edades: {
+                    '0-6m': {
+                        radar: [5, 2, 2, 4, 1],
+                        title: 'Target: 0-6 meses (Descubrimiento)',
+                        content: 'En esta primera etapa, la inversión en desarrollo se centra en lo sensorial y en la creación de vínculos afectivos. Los estímulos deben ser directos, seguros y de alto impacto.',
+                        claves: ['<strong>Foco Sensorial:</strong> Prioridad absoluta. El producto debe ofrecer una rica experiencia táctil y auditiva.', '<strong>Vínculo Afectivo:</strong> El diseño debe promover el apego. La suavidad y ergonomía no son negociables.', '<strong>Estímulo Visual:</strong> El uso de patrones y colores de alto contraste es mandatorio.']
+                    },
+                    '6-12m': {
+                        radar: [4, 4, 3, 4, 2],
+                        title: 'Target: 6-12 meses (Exploración)',
+                        content: 'El usuario se vuelve un explorador activo. Comienza a decodificar la relación causa-efecto y su motricidad fina emerge. El producto debe acompañar esta nueva etapa.',
+                        claves: ['<strong>Motricidad Gruesa/Fina:</strong> Elementos de agarre claros y seguros.', '<strong>Curiosidad:</strong> Incorporación de elementos sorpresa como espejos irrompibles o etiquetas.', '<strong>Cognición:</strong> El producto facilita la comprensión de la permanencia del objeto.']
+                    },
+                    '1-2a': {
+                        radar: [3, 5, 4, 4, 4],
+                        title: 'Target: 1-2 años (Imitación)',
+                        content: 'El juego se torna simbólico. El niño imita roles y su capacidad de lenguaje se dispara. El producto debe ofrecer mayor complejidad interactiva.',
+                        claves: ['<strong>Motricidad Fina Avanzada:</strong> Introducción de desafíos como velcros y cierres.', '<strong>Desarrollo del Lenguaje:</strong> El muñeco como herramienta para nombrar y describir.', '<strong>Juego Simbólico:</strong> El producto es ahora un sujeto para la imitación de rutinas.']
+                    },
+                    '2-3a': {
+                        radar: [2, 4, 5, 5, 5],
+                        title: 'Target: 2-3 años+ (Narrativa)',
+                        content: 'La imaginación y la interacción social dominan el juego. El muñeco es un personaje central en narrativas complejas, ayudando a procesar el mundo social y emocional.',
+                        claves: ['<strong>Inteligencia Emocional y Social:</strong> El producto como catalizador de juego de roles y expresión de sentimientos.', '<strong>Lenguaje Complejo:</strong> Fomento de la creación de historias y diálogos.', '<strong>Resolución de Problemas:</strong> Integración de desafíos de mayor complejidad motriz.']
+                    }
+                }
+            };
+
+            const infoDesarrolloContainer = document.getElementById('info-desarrollo');
+            document.querySelectorAll('.card[data-area]').forEach(card => {
+                card.addEventListener('click', () => {
+                    const area = card.dataset.area;
+                    const areaData = data.desarrollo[area];
+                    infoDesarrolloContainer.innerHTML = `
+                        <div class="text-left">
+                            <h4 class="text-xl font-bold text-amber-700 mb-2">${areaData.title}</h4>
+                            <p class="text-gray-600 mb-4">${areaData.content}</p>
+                            <h5 class="font-semibold mb-2">Aplicaciones en el producto:</h5>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                ${areaData.ideas.map(idea => `<li>${idea}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                });
+            });
+
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            const radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Sensorial', 'Motor Fino', 'Cognitivo', 'Socio-Emocional', 'Lenguaje'],
+                    datasets: [{
+                        label: 'Foco de Desarrollo',
+                        data: data.edades['0-6m'].radar,
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                        borderColor: 'rgba(245, 158, 11, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(245, 158, 11, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(245, 158, 11, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                            grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                            pointLabels: { font: { size: 12, weight: 'bold' }, color: '#4A4A4A' },
+                            ticks: { backdropColor: '#FDFBF8', color: '#71717A', stepSize: 1, font: { size: 10 } },
+                            min: 0,
+                            max: 5
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            const infoEdadContainer = document.getElementById('info-edad');
+            const ageButtons = document.querySelectorAll('.btn-age');
+
+            function updateAgeView(age) {
+                const ageData = data.edades[age];
+                radarChart.data.datasets[0].data = ageData.radar;
+                radarChart.update();
+                infoEdadContainer.innerHTML = `
+                    <h4 class="text-2xl font-bold text-amber-800 mb-4">${ageData.title}</h4>
+                    <p class="text-gray-600 mb-6">${ageData.content}</p>
+                    <div>
+                        <h5 class="font-bold mb-3 text-gray-700">Claves de Diseño para este Segmento:</h5>
+                        <ul class="space-y-3">
+                            ${ageData.claves.map(clave => `<li class="flex items-start"><span class="text-amber-500 mr-2 mt-1">◆</span><span class="text-gray-600">${clave}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                ageButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.age === age);
+                });
+            }
+            
+            ageButtons.forEach(button => {
+                button.addEventListener('click', () => { updateAgeView(button.dataset.age); });
+            });
+
+            updateAgeView('0-6m');
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if(pageYOffset >= sectionTop - 100){ current = section.getAttribute('id'); }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if(link.getAttribute('href') === `#${current}`){ link.classList.add('active'); }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
